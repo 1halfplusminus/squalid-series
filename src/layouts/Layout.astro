@@ -1,4 +1,6 @@
 ---
+
+import '../styles/global.css';
 export interface Props {
 	title: string;
 }
@@ -16,8 +18,11 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+
+		<slot name="header" />
 		<slot />
 	</body>
+	<slot name="footer" />
 </html>
 <style is:global>
 	:root {

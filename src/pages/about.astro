@@ -1,16 +1,56 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import NavLink from '../components/NavLink.astro';
+import Layout from '@astroboy/layouts/Layout.astro';
+import NavLink from '@astroboy/components/Header.astro';
+import Footer from '@astroboy/components/Footer.astro';
+const pageTitle = "About Me";
+
+const identity = {
+    firstName: "Gael",
+    country: "NC",
+    occupation: "Dev",
+    hobbies: ["coding", "reading", "writing", "hiking", "traveling"]
+}
+const skills = ["HTML", "CSS", "JavaScript", "React", "Node", "Express", "MongoDB", "SQL", "Python", "Java", "C++", "C", "C#", "PHP", "Ruby", "Swift", "Go", "Rust", "Dart", "Kotlin", "Scala", "Haskell", "Clojure", "Elixir", "F#", "Julia", "Lua", "Perl", "R", "SQL", "TypeScript", "VBA", "Assembly", "Bash", "COBOL", "Erlang", "Fortran", "Groovy", "Haxe", "Lisp", "Matlab", "Objective-C", "Pascal", "Prolog", "Racket", "Ruby", "Scheme", "Smalltalk", "Visual Basic", "WebAssembly", "XSLT", "Zsh"];
+const happy = true;
+const finished = false;
+const goal = 3;
+const skillColor = "navy";
 ---
 
 <Layout title="About astro">
-    <NavLink />
-    <h1>About Me</h1>
+
+    <NavLink slot="header" />
+	<Footer slot="footer" />
+    <h1>{pageTitle}</h1>
     <h2>... and my new Astro site!</h2>
   
     <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
   
     <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
+
+    <p>Here are a few facts about me:</p>
+<ul>
+  <li>My name is {identity.firstName}.</li>
+  <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
+  {identity.hobbies.length >= 2 && 
+    <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+  } 
+</ul>
+<p>My skills are:</p>
+<ul>
+  {skills.map((skill) => <li class="skill">{skill}</li>)}
+</ul>
+{happy && <p>I am happy to be learning Astro!</p>}
+
+{finished && <p>I finished this tutorial!</p>}
+
+{goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
 </Layout>
 
 
+<style define:vars={{skillColor}}>
+    .skill{
+        color: var(--skillColor);
+        font-weight: bold;
+    }
+</style>

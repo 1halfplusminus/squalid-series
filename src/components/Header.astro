@@ -1,0 +1,17 @@
+---
+import Hamburger from './Hamburger.astro';
+import Navigation from './NavLink.astro';
+---
+<header>
+  <nav>
+    <astro-menu>
+        <Hamburger />
+        <Navigation />
+    </astro-menu>
+
+  </nav>
+</header>
+
+<script>
+    import "@astroboy/scripts/menu"
+</script>
