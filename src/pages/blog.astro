@@ -1,0 +1,21 @@
+---
+import NavLink from "@astroboy/components/NavLink.astro";
+import BaseLayout from "../layouts/Layout.astro";
+import Footer from "@astroboy/components/Footer.astro";
+import BlogPost from "@astroboy/components/BlogPost.astro";
+const allPosts = await Astro.glob("./posts/*.mdx");
+const pageTitle = "My Astro Learning Blog";
+---
+
+<BaseLayout title={pageTitle}>
+  <NavLink slot="header" />
+  <Footer slot="footer" />
+  <p>This is where I will post about my journey learning Astro.</p>
+  <ul>
+    {
+      allPosts?.map((p, index) => (
+        <BlogPost title={`Post ${index+1}`} id={index+1} />
+      ))
+    }
+  </ul>
+</BaseLayout>
