@@ -14,7 +14,7 @@ const pageTitle = "My Astro Learning Blog";
   <ul>
     {
       allPosts?.map((p, index) => (
-        <BlogPost title={`Post ${index+1}`} id={index+1} />
+        <BlogPost title={p.frontmatter?.title} id={index+1} />
       ))
     }
   </ul>

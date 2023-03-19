@@ -1,0 +1,39 @@
+---
+import BlogPost from "@astroboy/components/BlogPost.astro";
+import BaseLayout from "../../layouts/Layout.astro";
+import NavLink from "@astroboy/components/NavLink.astro";
+import Footer from "@astroboy/components/Footer.astro";
+import {  getUniqueTags } from "@astroboy/core";
+
+export interface Props {
+  posts: Array<{frontmatter:any}>;
+}
+
+export async function getStaticPaths() {
+const allPosts = await Astro.glob("../posts/*.mdx");
+  const uniqueTags = getUniqueTags(allPosts);
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) => post.frontmatter.tags.includes(tag));
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const {posts} = Astro.props;
+---
+
+<BaseLayout title={tag ?? ""}>
+    <NavLink slot="header" />
+    <Footer slot="footer" />
+  <p>Posts tagged with {tag}</p>
+  <ul>
+    {
+      posts?.map((p, index) => (
+        <BlogPost title={p.frontmatter.title} id={index+1} />
+      ))
+    }
+  </ul>
+</BaseLayout>

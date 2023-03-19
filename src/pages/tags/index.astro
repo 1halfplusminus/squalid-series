@@ -1,0 +1,16 @@
+---
+import Footer from "@astroboy/components/Footer.astro";
+import NavLink from "@astroboy/components/NavLink.astro";
+import TagsCloud from "@astroboy/components/TagsCloud.astro";
+import { getUniqueTags } from "@astroboy/core";
+import Layout from "@astroboy/layouts/Layout.astro";
+
+const allPosts = await Astro.glob("../posts/*.mdx");
+const uniqueTags = getUniqueTags(allPosts);
+---
+
+<Layout title="all tags">
+  <NavLink slot="header" />
+  <Footer slot="footer" />
+  <TagsCloud tags={uniqueTags} />
+</Layout>
