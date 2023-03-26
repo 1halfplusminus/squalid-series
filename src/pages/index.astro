@@ -2,6 +2,7 @@
 import Layout from '@astroboy/layouts/Layout.astro';
 import Footer from '@astroboy/components/Footer.astro';
 import NavLink from '@astroboy/components/Header.astro';
+import Greeting from '@astroboy/components/Greeting';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -10,7 +11,8 @@ import NavLink from '@astroboy/components/Header.astro';
 	<h1>My Astro Site</h1>
 	<h1>My Astro Learning Blog</h1>
 	<p>This is where I will post about my journey learning Astro.</p>
-	
+	<Greeting messages={["Hi","Hello","Howdy"]} />
+	<Greeting client:load messages={["Hi","Hello","Howdy"]} />
 </Layout>
 <style>
 	h1 {
